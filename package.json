@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ibrahimnsu15/teamAbacus_cse299#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "nodemon": "^1.18.5"
   }
 }
