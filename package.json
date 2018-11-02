@@ -1,0 +1,24 @@
+{
+  "name": "team_abacus",
+  "version": "1.0.0",
+  "description": "\"Cse299 home security project\"",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibrahimnsu15/teamAbacus_cse299.git"
+  },
+  "keywords": [
+    "simple",
+    "nodejs",
+    "app"
+  ],
+  "author": "ibrahim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ibrahimnsu15/teamAbacus_cse299/issues"
+  },
+  "homepage": "https://github.com/ibrahimnsu15/teamAbacus_cse299#readme"
+}
