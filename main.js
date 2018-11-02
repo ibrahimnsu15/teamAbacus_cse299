@@ -17,7 +17,7 @@ app.use(middleware);
 
 app.route("/")
     .get( (req,res) =>{
-        res.send("hello from app");
+        res.sendFile(__dirname+"/loginPage.html");
     });
 
 
