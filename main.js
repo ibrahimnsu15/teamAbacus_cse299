@@ -19,6 +19,10 @@ app.route("/")
     .get( (req,res) =>{
         res.sendFile(__dirname+"/loginPage.html");
     });
+app.route("/signup")
+    .get( (req,res) =>{
+        res.sendFile(__dirname+"/signup.html");
+    });
 
 
 app.listen(port, console.log(`Server start on port no : ${port}`));
