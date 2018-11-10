@@ -10,7 +10,7 @@ app.use(express.static(__dirname+"/resource"));
 
 // Middleware
 const middleware = (req,res,next)=>{
-    console.log(req.method +" "+req.url);   
+    // console.log(req.method +" "+req.url);   
     next();
 }
 app.use(middleware);
@@ -25,7 +25,8 @@ app.route("/signup")
     });
 
 
-app.listen(port, console.log(`Server start on port no : ${port}`));
+// app.listen(port, console.log(`Server start on port no : ${port}`));
+app.listen(port);
 
 
 
