@@ -2,7 +2,7 @@
 // all variable
 const express = require("express");
 const app = express();
-const port = process.env.port || 3000; // server port
+const port = process.env.PORT || 3000; // server port
 
 // static 
 app.use(express.static(__dirname+"/resource"));
@@ -54,7 +54,7 @@ app.route("/tmp").get( (req,res) =>{
 
 
 
-app.listen(port, console.log(`Server start on port no : ${port}`));
+app.listen(port, console.log(`Server start on port : ${port}`));
 // app.listen(port);
 
 
