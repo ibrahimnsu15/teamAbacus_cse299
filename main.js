@@ -7,10 +7,11 @@ const port = process.env.port || 3000; // server port
 // static 
 app.use(express.static(__dirname+"/resource"));
 
+var counter=0;
 
 // Middleware
 const middleware = (req,res,next)=>{
-    // console.log(req.method +" "+req.url);   
+    console.log(req.method +" "+req.url);   
     next();
 }
 app.use(middleware);
@@ -24,9 +25,37 @@ app.route("/signup")
         res.sendFile(__dirname+"/signup.html");
     });
 
+app.route("/req").get( (req,res) =>{
+    counter++;
+    var tmp = counter.toString();
+    res.statusCode=200;
+    res.send(tmp);
+});
 
-// app.listen(port, console.log(`Server start on port no : ${port}`));
-app.listen(port);
+app.route("/reqCount").get( (req,res) =>{
+    var tmp = counter.toString();
+    // res.send(counter);
+    res.send(tmp, { 'Content-Type': 'text/plain' }, 201);
+   
+});
+
+
+
+app.route("/test").get( (req,res) =>{
+    res.statusCode=200;
+    res.sendFile(__dirname+"/testPage.html");
+});
+
+app.route("/tmp").get( (req,res) =>{
+    res.statusCode=200;
+    res.sendFile(__dirname+"/temp.html");
+});
+
+
+
+
+app.listen(port, console.log(`Server start on port no : ${port}`));
+// app.listen(port);
 
 
 

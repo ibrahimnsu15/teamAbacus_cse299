@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <title>Test Page</title>
+        
+    </head>
+    <body>
+        <input type="text" name="in"><br>
+        <h1 id="counterDisplay">Url request: </h1>
+        <script>
+            
+            var counter="0";
+            var countDisplay = document.getElementById("counterDisplay");
+            function setCounter(){
+                console.log("yes");
+                counterHttpRequest();
+            };
+            
+            function counterHttpRequest(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET","http://localhost:3000/reqCount",true);
+                xhr.responseType = 'text';
+                xhr.onload = function () {
+                    if (xhr.readyState === xhr.DONE) {
+                        if (xhr.status === 200) {
+                            counter = xhr.responseText;
+                            console.log(counter);
+                            console.log(xhr.response);
+                            console.log(xhr.responseText);
+                            countDisplay.innerHTML = "Url request: "+counter;
+                        }
+                    }
+                };
+
+                xhr.send(null);
+                
+            }
+            setCounter();
+            var autoCall = setInterval(setCounter,2000);
+
+        </script>
+    </body>
+</html>
