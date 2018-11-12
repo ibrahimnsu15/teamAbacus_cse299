@@ -42,7 +42,7 @@
             firebase.auth().signInWithEmailAndPassword(email.value, pass.value)
             .then(function(firebaseUser){
                 ///Success full login and redirect
-                location.replace("/test");
+                location.replace("/home");
             })
             .catch(function(error) {
                 // Handle Errors here.

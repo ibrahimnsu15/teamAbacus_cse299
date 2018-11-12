@@ -25,6 +25,11 @@ app.route("/signup")
         res.sendFile(__dirname+"/signup.html");
     });
 
+app.route("/home")
+    .get( (req,res) =>{
+        res.sendFile(__dirname+"/home.html");
+    });
+
 app.route("/req").get( (req,res) =>{
     counter++;
     var tmp = counter.toString();
