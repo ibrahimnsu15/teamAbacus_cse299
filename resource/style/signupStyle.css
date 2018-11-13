@@ -3,11 +3,11 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #2d98da;
+    background: #d5d6d6;
 }
 .box{
     width: 30%;
-    height:60%;
+    height:80%;
     padding: 40px;
     position: absolute;
     top: 50%;
@@ -75,6 +75,7 @@ body{
 }
 
 a:hover{background: rgba(255,255,255, 0.1 ); }
+/* responsive for mobile */
 @media (min-width: 320px) and (max-width: 480px) {
 
 
@@ -82,7 +83,7 @@ a:hover{background: rgba(255,255,255, 0.1 ); }
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        background:  rgba(39, 174, 96,1.0);
+        background: #2d98da;
     }
     .box{
         width: 60%;
@@ -152,16 +153,6 @@ a:hover{background: rgba(255,255,255, 0.1 ); }
         transition: 0.4s all;
         border-radius: 1px;
 
-    }
-    .b2{text-decoration: none;
-        display: block;
-        padding:10px 0;
-        width:85%;
-        text-align: center;
-        margin: auto;
-        color: white;
-        font-weight: 300;
-        background-color: red;
     }
 
     a:hover{background: rgba(255,255,255, 0.1 );
