@@ -40,7 +40,7 @@ app.route("/req").get( (req,res) =>{
 app.route("/reqCount").get( (req,res) =>{
     var tmp = counter.toString();
     // res.send(counter);
-    res.send(tmp, { 'Content-Type': 'text/plain' }, 201);
+    res.send(tmp, { 'Content-Type': 'text/plain' }, 200);
    
 });
 

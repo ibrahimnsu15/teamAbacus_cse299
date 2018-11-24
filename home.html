@@ -1,24 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Abacus security home</title>
-	<meta charset="utf-8">
-</head>
-<body>
-	<style type="text/css" media="screen">
-
-	</style>
-    <nav> 
-    	<div id="navbar">
-    	 <ul id="navlist">
-          <li><a href="" >Notification Status</a></li>
-          <li><a href="" >Notification Log</a></li>
-          <li><a href="" >Activities</a></li>
-          <li><a href="/" title=""id="logoutClick">logout</a></li>
+    <head>
+        <link rel="stylesheet" href="style/homeStyle.css">
+        <meta charset="utf-8">
+        <title>Abacus Home</title>
+    </head>
+    <body>
  
-        </ul>
-    	</div>
-    </nav>
+        <nav>
  
-   </body>
+            <ul>
+                <li class="List"><a href="#" id="home">Home</a></li>
+                <li class="List"><a href="#" id="log">Notification Log</a></li>
+                <li class="List"><a href="#" id="about">About</a></li>
+                <li class="logoutList"><a href="#" id="logout">logout</a></li>
+ 
+            </ul>
+ 
+        </nav>
+ 
+ 
+        <div class="container">
+            <h2 >Abacus Security screen</h2>
+            <h2 id="resultScreen">Object Detection : </h2>
+        </div>
+ 
+        <script>
+            var counter="0";
+            var flag=false;
+            var display = document.getElementById("resultScreen");
+            function setSignalScreen(){
+                console.log("Call screen "+counter);
+                getHttpRequest();
+            };
+ 
+            function getHttpRequest(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET","/reqCount",true);
+                xhr.responseType = 'text';
+                xhr.onload = function(){
+                    if(xhr.readyState === xhr.DONE){
+                        if(xhr.responseText != counter){
+                            console.log("Response: "+xhr.responseText);
+                            display.innerHTML = "Object Detection : yes";
+                            counter=xhr.responseText;
+                            flag=true;
+                        }else{
+                            console.log("Response: "+xhr.responseText);
+                            display.innerHTML = "Object Detection : no";
+                            counter=xhr.responseText;
+                        }
+                    }
+                }
+                xhr.send(null); 
+            }
+            setSignalScreen();
+            setInterval(setSignalScreen,1000);
+        </script>
+ 
+    </body>
 </html>

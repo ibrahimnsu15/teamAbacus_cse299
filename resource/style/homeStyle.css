@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #2d98da;
+    font-family: 'Century Gothic',sans-serif;
+}
+ 
+ 
+nav ul{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: white;
+    background-color: #5a6e77;
+    text-align: left;
+    transition: max-height 0.4s;
+}
+nav ul li{
+    display: inline-block;
+    padding: 20px;
+    transition: all ease-in-out 250ms;
+    cursor: pointer;
+}
+ 
+ 
+nav ul li a{
+    text-decoration: none;
+    color: white;
+}
+nav ul li:hover{
+    background: #3498db;
+}
+ 
+ 
+.container{
+    padding: 2%;
+    margin-top: 3%;
+    margin-left: 20%;
+    width: 60%;
+    background-color: #80b1cf;
+}
+ 
