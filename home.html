@@ -10,8 +10,8 @@
         <nav>
  
             <ul>
-                <li class="List"><a href="#" id="home">Home</a></li>
-                <li class="List"><a href="#" id="log">Notification Log</a></li>
+                <li class="List"><a href="#" id="home" onclick="home_click()">Home</a></li>
+                <li class="List"><a href="#" id="log" onclick="log_click()">Notification Log</a></li>
                 <li class="List"><a href="#" id="about">About</a></li>
                 <li class="logoutList"><a href="#" id="logout">logout</a></li>
  
@@ -20,12 +20,57 @@
         </nav>
  
  
-        <div class="container">
+        <div class="container" id="home_content">
             <h2 >Abacus Security screen</h2>
             <h2 id="resultScreen">Object Detection : </h2>
         </div>
+        <div class="container" id="log_content" style="margin-top: -120px">
+        <div class="row">
+        <h2 style="color:red; padding-bottom: 20px;text-align: center;">Details Information Of Touch Detection</h2>
+
+                 <table class="table">
+              <thead>
+                <tr>
+                  <th>Serial No.</th>
+                  <th>Sensor No.</th>
+                  <th>Touch Time</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>2:20:11</td>
+                   <td>11/31/2018</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>2:20:11</td>
+                   <td>11/31/2018</td>
+                </tr>
+
+              </tbody>
+            </table>
+        </div>
+     </div>
  
         <script>
+              function log_click() {
+                 console.log("log_cick()");
+                  document.getElementById('home_content').style.visibility="hidden";
+                  document.getElementById('log_content').style.visibility="visible";
+
+              }
+
+              function home_click() {
+                console.log("home_click()");
+                document.getElementById('home_content').style.visibility="visible";
+                document.getElementById('log_content').style.visibility="hidden";                  
+              };
+              home_click();
+
             var counter="0";
             var flag=false;
             var display = document.getElementById("resultScreen");
@@ -54,8 +99,8 @@
                 }
                 xhr.send(null); 
             }
-            setSignalScreen();
-            setInterval(setSignalScreen,1000);
+            //setSignalScreen();
+            //setInterval(setSignalScreen,1000);
         </script>
  
     </body>

@@ -1,8 +1,19 @@
 
-// all variable
+// all module
 const express = require("express");
 const app = express();
+var mysql = require('mysql');
+
 const port = process.env.PORT || 3000; // server port
+
+// database connection
+var connection = mysql.createConnection({
+    host: "sql12.freemysqlhosting.net",
+    user: "sql12267776",
+    password: "Gy4QVm3LlA",
+    database: "sql12267776",
+    port: 3306
+});
 
 // static 
 app.use(express.static(__dirname+"/resource"));
@@ -32,6 +43,16 @@ app.route("/home")
 
 app.route("/req").get( (req,res) =>{
     counter++;
+    var time = getTime();
+    var date = getDate();
+    var sql = "insert into detect_history (count,id,time,date) values ("+counter+",1,'"+time+"','"+date+"')";
+
+    connection.query(sql, (err,result)=>{
+        if (err) throw new Error("Database error!!");
+        console.log("1 data inserted!!");
+    });
+
+
     var tmp = counter.toString();
     res.statusCode=200;
     res.send(tmp);
@@ -63,6 +84,34 @@ app.listen(port, console.log(`Server start on port : ${port}`));
 // app.listen(port);
 
 
+// my funtion
+
+function getTime(){
+
+    var time  = new Date();
+
+    var hour = time.getHours();
+    var minute = time.getMinutes();
+    var second = time.getSeconds();
+    var meridian="am"
+    if(hour>12){
+        hour=hour%12;
+        meridian = "pm"
+    }
+    var t = time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()+" "+meridian;
+    return t;
+}
+
+function getDate(){
+
+    var date  = new Date();
+    
+    var days = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'];
+
+
+    var d = days[date.getDay()]+" "+date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+    return d;
+}
 
 
 
