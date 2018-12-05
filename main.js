@@ -27,6 +27,8 @@ const middleware = (req,res,next)=>{
 }
 app.use(middleware);
 
+
+/// all route
 app.route("/")
     .get( (req,res) =>{
         res.sendFile(__dirname+"/loginPage.html");
@@ -75,6 +77,14 @@ app.route("/test").get( (req,res) =>{
 app.route("/tmp").get( (req,res) =>{
     res.statusCode=200;
     res.sendFile(__dirname+"/temp.html");
+});
+
+app.route("/listQuery").get( (req,res) =>{
+    res.statusCode=200;
+    connection.query("select  * from detect_history order by serial desc", (err,result,fields)=>{
+        if (err) throw new Error("Database error!!");
+        res.json(result);
+    });
 });
 
 

@@ -10,10 +10,10 @@
         <nav>
  
             <ul>
-                <li class="List"><a href="#" id="home" onclick="home_click()">Home</a></li>
-                <li class="List"><a href="#" id="log" onclick="log_click()">Notification Log</a></li>
-                <li class="List"><a href="#" id="about">About</a></li>
-                <li class="logoutList"><a href="#" id="logout">logout</a></li>
+                <li class="List"><a id="home" onclick="home_click()">Home</a></li>
+                <li class="List"><a  id="log" onclick="log_click()">Notification Log</a></li>
+                <li class="List"><a  id="about" onclick="about_click()">About</a></li>
+                <li class="logoutList"><a  id="logout" onclick="logout_click()" >logout</a></li>
  
             </ul>
  
@@ -24,61 +24,126 @@
             <h2 >Abacus Security screen</h2>
             <h2 id="resultScreen">Object Detection : </h2>
         </div>
-        <div class="container" id="log_content" style="margin-top: -120px">
+        <div class="container" id="log_content" style="margin-top: -140px">
         <div class="row">
-        <h2 style="color:red; padding-bottom: 20px;text-align: center;">Details Information Of Touch Detection</h2>
+        <h2 style="color:red; padding-bottom: 20px;text-align: center;">Detection History</h2>
 
-                 <table class="table">
+            <table class="table">
               <thead>
                 <tr>
-                  <th>Serial No.</th>
-                  <th>Sensor No.</th>
-                  <th>Touch Time</th>
-                  <th>Date</th>
+                  <td>Serial No.</th>
+                  <td>Sensor No.</th>
+                  <td>Touch Time</th>
+                  <td>Date</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="database_table">
                 <tr>
                     <td>1</td>
                     <td>5</td>
                     <td>2:20:11</td>
                    <td>11/31/2018</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>5</td>
-                    <td>2:20:11</td>
-                   <td>11/31/2018</td>
-                </tr>
-
               </tbody>
             </table>
         </div>
      </div>
  
         <script>
-              function log_click() {
-                 console.log("log_cick()");
-                  document.getElementById('home_content').style.visibility="hidden";
-                  document.getElementById('log_content').style.visibility="visible";
+            getQueryHttpRequest();
+            /// database update
+            function getQueryHttpRequest(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET","/listQuery",true);
+                xhr.responseType = 'json';
+                xhr.onload = function(){
+                    if(xhr.readyState === xhr.DONE){
+                        console.log(xhr.response);
+                        databaseQueryTableUpdate(xhr.response);
+                           
+                    }
+                }
+                xhr.send(null); 
+            }
+            
+            function databaseQueryTableUpdate(queryResultJson){
 
-              }
+                var table = document.getElementById("database_table");
+                
+                while(table.hasChildNodes()){
+                    table.removeChild(table.firstChild);
+                }
+                
+                var len = queryResultJson.length;
+                for(var i = 0 ; i < len ; i++){
+                    var sn = queryResultJson[i]["id"];
+                    var time = queryResultJson[i]["time"];
+                    var date = queryResultJson[i]["date"];
+                    
+                    var tableRow = makeTableRow(i+1,sn,time,date);
+                    table.appendChild(tableRow);
 
-              function home_click() {
-                console.log("home_click()");
-                document.getElementById('home_content').style.visibility="visible";
-                document.getElementById('log_content').style.visibility="hidden";                  
-              };
-              home_click();
+                }
+
+            }
+
+            function makeTableRow(n,sn,time,date){
+                var row = document.createElement("TR");
+                
+                var e1 = document.createElement("TD");
+                var e2 = document.createElement("TD");
+                var e3 = document.createElement("TD");
+                var e4 = document.createElement("TD");
+
+                var t1 = document.createTextNode(n);
+                var t2 = document.createTextNode(sn);
+                var t3 = document.createTextNode(time);
+                var t4 = document.createTextNode(date);
+                
+                e1.appendChild(t1);
+                e2.appendChild(t2);
+                e3.appendChild(t3);
+                e4.appendChild(t4);
+
+                row.appendChild(e1);
+                row.appendChild(e2);
+                row.appendChild(e3);
+                row.appendChild(e4);
+
+                return row;
+            
+            }
+
+            function logout_click(){
+                location.replace("/");
+            }
+
+            function about_click(){
+                alert("This is CSE299 team abacus project. All member are ibrahim,ahsan,nazmul and rafsan");
+            }
+
+            function log_click() {
+                console.log("log_cick()");
+                document.getElementById('home_content').style.visibility="hidden";
+                document.getElementById('log_content').style.visibility="visible";
+
+            }
+
+            function home_click() {
+            console.log("home_click()");
+            document.getElementById('home_content').style.visibility="visible";
+            document.getElementById('log_content').style.visibility="hidden";                  
+            };
+            home_click();
 
             var counter="0";
-            var flag=false;
             var display = document.getElementById("resultScreen");
             function setSignalScreen(){
                 console.log("Call screen "+counter);
                 getHttpRequest();
             };
  
+            // Detection http request
             function getHttpRequest(){
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET","/reqCount",true);
@@ -89,7 +154,7 @@
                             console.log("Response: "+xhr.responseText);
                             display.innerHTML = "Object Detection : yes";
                             counter=xhr.responseText;
-                            flag=true;
+                            getQueryHttpRequest();
                         }else{
                             console.log("Response: "+xhr.responseText);
                             display.innerHTML = "Object Detection : no";
@@ -99,8 +164,8 @@
                 }
                 xhr.send(null); 
             }
-            //setSignalScreen();
-            //setInterval(setSignalScreen,1000);
+            setSignalScreen();
+            setInterval(setSignalScreen,1000);
         </script>
  
     </body>
