@@ -23,6 +23,19 @@
         <div class="container" id="home_content">
             <h2 >Abacus Security screen</h2>
             <h2 id="resultScreen">Object Detection : </h2>
+            <h2>Last detection</h2>
+            <table class="lastDetecttable">
+                    <thead>
+                      <tr>
+                        <td>Sensor No.</th>
+                        <td>Touch Time</th>
+                        <td>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lastDetectdatabase_table">
+                      
+                    </tbody>
+                  </table>
         </div>
         <div class="container" id="log_content" style="margin-top: -140px">
         <div class="row">
@@ -67,22 +80,33 @@
             }
             
             function databaseQueryTableUpdate(queryResultJson){
-
+                
                 var table = document.getElementById("database_table");
+                var Htable = document.getElementById("lastDetectdatabase_table");
                 
                 while(table.hasChildNodes()){
                     table.removeChild(table.firstChild);
                 }
                 
+                while(Htable.hasChildNodes()){
+                    Htable.removeChild(Htable.firstChild);
+                }
+                
+                // Home last detection tv
+
                 var len = queryResultJson.length;
                 for(var i = 0 ; i < len ; i++){
-                    var sn = queryResultJson[i]["id"];
+                    var sn = queryResultJson[i]["sensorId"];
                     var time = queryResultJson[i]["time"];
                     var date = queryResultJson[i]["date"];
                     
                     var tableRow = makeTableRow(i+1,sn,time,date);
                     table.appendChild(tableRow);
-
+                    
+                    if(i==0){
+                        var HtableRow = HMakeTableRow(sn,time,date);
+                        Htable.appendChild(HtableRow);
+                    }
                 }
 
             }
@@ -110,6 +134,29 @@
                 row.appendChild(e3);
                 row.appendChild(e4);
 
+                return row;
+            
+            }
+
+            function HMakeTableRow(sn,time,date){
+                var row = document.createElement("TR");
+                
+                var e1 = document.createElement("TD");
+                var e2 = document.createElement("TD");
+                var e3 = document.createElement("TD");
+               
+                var t1 = document.createTextNode(sn);
+                var t2 = document.createTextNode(time);
+                var t3 = document.createTextNode(date);
+                
+                e1.appendChild(t1);
+                e2.appendChild(t2);
+                e3.appendChild(t3);
+             
+                row.appendChild(e1);
+                row.appendChild(e2);
+                row.appendChild(e3);
+             
                 return row;
             
             }

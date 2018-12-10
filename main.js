@@ -9,9 +9,9 @@ const port = process.env.PORT || 3000; // server port
 // database connection
 var connection = mysql.createConnection({
     host: "sql12.freemysqlhosting.net",
-    user: "sql12267776",
-    password: "Gy4QVm3LlA",
-    database: "sql12267776",
+    user: "sql12269436",
+    password: "tPvc4Jnjpj",
+    database: "sql12269436",
     port: 3306
 });
 
@@ -47,7 +47,7 @@ app.route("/req").get( (req,res) =>{
     counter++;
     var time = getTime();
     var date = getDate();
-    var sql = "insert into detect_history (count,id,time,date) values ("+counter+",1,'"+time+"','"+date+"')";
+    var sql = "insert into detect_history (sensorId,time,date) values (1,'"+time+"','"+date+"')";
 
     connection.query(sql, (err,result)=>{
         if (err) throw new Error("Database error!!");
@@ -100,7 +100,7 @@ function getTime(){
 
     var time  = new Date();
 
-    var hour = time.getHours()+3;
+    var hour = time.getHours();
     var minute = time.getMinutes();
     var second = time.getSeconds();
     var meridian="am"
