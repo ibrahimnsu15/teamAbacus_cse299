@@ -100,12 +100,15 @@ function getTime(){
 
     var time  = new Date();
 
-    var hour = time.getHours();
+    var hour = 6+ time.getHours();
     var minute = time.getMinutes();
     var second = time.getSeconds();
     var meridian="am"
     
     
+    if(hour>24){
+        hour=hour%24;
+    }
 
     if(hour>12){
         hour=hour%12;
