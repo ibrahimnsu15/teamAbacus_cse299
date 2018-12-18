@@ -9,9 +9,9 @@ const port = process.env.PORT || 3000; // server port
 // database connection
 var connection = mysql.createConnection({
     host: "sql12.freemysqlhosting.net",
-    user: "sql12269436",
-    password: "tPvc4Jnjpj",
-    database: "sql12269436",
+    user: "sql12270558",
+    password: "ScvznCe494",
+    database: "sql12270558",
     port: 3306
 });
 
@@ -105,7 +105,7 @@ function getTime(){
     var second = time.getSeconds();
     var meridian="am"
     
-    
+        
     if(hour>24){
         hour=hour%24;
     }
