@@ -36,25 +36,5 @@ To make this project we use IR sensor, nodeMCU, heroku cloud server, nodejs app 
 <img src="/webflow.png"/> 
 
 
-3. Deliverable device 
-
-Hardware device
-Website 
-Android app
-
-
-5. Challenges and Difficulties
-
-Hardware Challenges 
-Esp8266 Module connection fail
-Nodemcu HTTP request error
-IR sensor Range coverage problem
-
-Software Challenges
-Server sometime cannot load
-Firebase connection fail
-Higher time complexity for database query
-Fail to load html changes
-
 
 
